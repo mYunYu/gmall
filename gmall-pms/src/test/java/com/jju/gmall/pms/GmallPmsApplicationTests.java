@@ -17,7 +17,6 @@ public class GmallPmsApplicationTests {
 
     @Test
     public void contextLoads() {
-
         Product product = productService.getById(1);
         System.out.println(product.getName());
     }
