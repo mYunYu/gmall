@@ -1,6 +1,8 @@
 package com.jju.gmall.pms;
 
+import com.jju.gmall.pms.entity.Brand;
 import com.jju.gmall.pms.entity.Product;
+import com.jju.gmall.pms.service.BrandService;
 import com.jju.gmall.pms.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +17,24 @@ public class GmallPmsApplicationTests {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    BrandService brandService;
+
     @Test
     public void contextLoads() {
-        Product product = productService.getById(1);
-        System.out.println(product.getName());
+//        Product product = productService.getById(1);
+//        System.out.println(product.getName());
+
+        //测试增删改在主库，查在从库
+//        Brand brand = new Brand();
+//        brand.setName("测试");
+//        brandService.save(brand);
+
+        //修改从库的某条数据进行查询，如果是从库的数据则表示ok
+        Brand brand1 = brandService.getById(53);
+        System.out.println(brand1.getName());
+
+
     }
 
 }
