@@ -26,11 +26,9 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
-        <!--引入logback整合logstash的第三方jar包-->
         <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-            <version>5.3</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>

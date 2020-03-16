@@ -1,73 +1,75 @@
 package com.jju.gmall.pms.entity;
 
-    import com.baomidou.mybatisplus.annotation.TableName;
-    import com.baomidou.mybatisplus.annotation.IdType;
-    import com.baomidou.mybatisplus.annotation.TableId;
-    import com.baomidou.mybatisplus.annotation.TableField;
-    import java.io.Serializable;
-    import io.swagger.annotations.ApiModel;
-    import io.swagger.annotations.ApiModelProperty;
-    import lombok.Data;
-    import lombok.EqualsAndHashCode;
-    import lombok.experimental.Accessors;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableField;
+
+import java.io.Serializable;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 /**
-* <p>
-    * 产品分类
-    * </p>
-*
-* @author mYunYu
-* @since 2020-03-12
-*/
-    @Data
-        @EqualsAndHashCode(callSuper = false)
-    @Accessors(chain = true)
-    @TableName("pms_product_category")
-    @ApiModel(value="ProductCategory对象", description="产品分类")
-    public class ProductCategory implements Serializable {
+ * <p>
+ * 产品分类
+ * </p>
+ *
+ * @author mYunYu
+ * @since 2020-03-12
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+@TableName("pms_product_category")
+@ApiModel(value = "ProductCategory对象", description = "产品分类")
+public class ProductCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-            @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-            @ApiModelProperty(value = "上机分类的编号：0表示一级分类")
-        @TableField("parent_id")
+    @ApiModelProperty(value = "上机分类的编号：0表示一级分类")
+    @TableField("parent_id")
     private Long parentId;
 
-        @TableField("name")
+    @TableField("name")
     private String name;
 
-            @ApiModelProperty(value = "分类级别：0->1级；1->2级")
-        @TableField("level")
+    @ApiModelProperty(value = "分类级别：0->1级；1->2级")
+    @TableField("level")
     private Integer level;
 
-        @TableField("product_count")
+    @TableField("product_count")
     private Integer productCount;
 
-        @TableField("product_unit")
+    @TableField("product_unit")
     private String productUnit;
 
-            @ApiModelProperty(value = "是否显示在导航栏：0->不显示；1->显示")
-        @TableField("nav_status")
+    @ApiModelProperty(value = "是否显示在导航栏：0->不显示；1->显示")
+    @TableField("nav_status")
     private Integer navStatus;
 
-            @ApiModelProperty(value = "显示状态：0->不显示；1->显示")
-        @TableField("show_status")
+    @ApiModelProperty(value = "显示状态：0->不显示；1->显示")
+    @TableField("show_status")
     private Integer showStatus;
 
-        @TableField("sort")
+    @TableField("sort")
     private Integer sort;
 
-            @ApiModelProperty(value = "图标")
-        @TableField("icon")
+    @ApiModelProperty(value = "图标")
+    @TableField("icon")
     private String icon;
 
-        @TableField("keywords")
+    @TableField("keywords")
     private String keywords;
 
-            @ApiModelProperty(value = "描述")
-        @TableField("description")
+    @ApiModelProperty(value = "描述")
+    @TableField("description")
     private String description;
 
 

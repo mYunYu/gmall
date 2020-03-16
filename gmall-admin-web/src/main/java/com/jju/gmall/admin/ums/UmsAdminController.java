@@ -10,13 +10,16 @@ import com.jju.gmall.to.CommonResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,7 @@ import java.util.Map;
  * 后台用户管理
  * Created by atguigu 4/26.
  */
+@Slf4j
 @CrossOrigin
 @Controller
 @Api(tags = "AdminController", description = "后台用户管理")
@@ -41,10 +45,19 @@ public class UmsAdminController {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
+    /**
+     *  注册成功返回用户的所有信息
+     * @param umsAdminParam
+     * @param result
+     * @return
+     */
     @ApiOperation(value = "用户注册")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public Object register(@RequestBody UmsAdminParam umsAdminParam, BindingResult result) {
+    public Object register(@Valid @RequestBody UmsAdminParam umsAdminParam, BindingResult result) {
+        //校验参数   直接在aop中处理
+        log.debug("需要注册的用户详情：{}", umsAdminParam);
+
         Admin admin = null;
         //TODO 完成注册功能
 

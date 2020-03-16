@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author mYunYu
- * @since 2020-03-12
+ * @since 2020-03-16
  */
 public interface CommentService extends IService<Comment> {
 

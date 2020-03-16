@@ -19,7 +19,7 @@ package com.jju.gmall.pms.entity;
     * </p>
 *
 * @author mYunYu
-* @since 2020-03-12
+* @since 2020-03-16
 */
     @Data
         @EqualsAndHashCode(callSuper = false)

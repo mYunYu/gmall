@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
@@ -19,6 +21,9 @@ public class GmallPmsApplicationTests {
 
     @Autowired
     BrandService brandService;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Test
     public void contextLoads() {
@@ -33,8 +38,15 @@ public class GmallPmsApplicationTests {
         //修改从库的某条数据进行查询，如果是从库的数据则表示ok
         Brand brand1 = brandService.getById(53);
         System.out.println(brand1.getName());
-
-
     }
+
+    @Test
+    public void test(){
+        redisTemplate.opsForValue().set("hello", "world");
+
+        String world = redisTemplate.opsForValue().get("hello");
+        System.out.println(world);
+    }
+
 
 }

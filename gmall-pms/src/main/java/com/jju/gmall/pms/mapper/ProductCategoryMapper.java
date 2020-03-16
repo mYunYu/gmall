@@ -2,6 +2,9 @@ package com.jju.gmall.pms.mapper;
 
 import com.jju.gmall.pms.entity.ProductCategory;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jju.gmall.vo.product.PmsProductCategoryWithChildrenItem;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
 
+    List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(int i);
 }
