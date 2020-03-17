@@ -56,13 +56,7 @@ public class PmsProductAttributeCategoryController {
     @ResponseBody
     public Object getList(@RequestParam(defaultValue = "5") Integer pageSize,
                           @RequestParam(defaultValue = "1") Integer pageNum) {
-
-
-        // TODO: 2020-03-16
-//        PageInfoVo pageInfoVo = productAttributeCategoryService.roductAttributeCategoryPageInfo(pageNum,pageSize);
-
-        PageInfoVo pageInfoVo = null;
-
+        PageInfoVo pageInfoVo = productAttributeCategoryService.productAttributeCategoryPageInfo(pageNum,pageSize);
         return new CommonResult().success(pageInfoVo);
     }
 

@@ -32,13 +32,8 @@ public class PmsProductAttributeController {
                           @RequestParam(value = "type") Integer type,
                           @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
                           @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-
         //查出这个属性分类下所有的销售属性和基本参数
-        // TODO: 2020-03-16
-//        PageInfoVo pageInfoVo = productAttributeService.getCategoryAttributes(cid,type,pageSize,pageNum);
-
-        PageInfoVo pageInfoVo = null;
-
+        PageInfoVo pageInfoVo = productAttributeService.getCategoryAttributes(cid,type,pageSize,pageNum);
         return new CommonResult().success(pageInfoVo);
     }
 

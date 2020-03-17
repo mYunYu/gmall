@@ -37,30 +37,22 @@ import java.util.List;
 public class DataValidAspect {
 
     @Around("execution(* com.jju.gmall.admin..*Controller.*(..))")
-    public Object validAround(ProceedingJoinPoint point){
-        Object proceed = null;
-        try{
-            //校验参数
-            Object[] args = point.getArgs();
-            for (Object obj : args) {
-                if(obj instanceof BindingResult){
-                    BindingResult result = (BindingResult) obj;
-                    //检验错误数
-                    int errorCount = result.getErrorCount();
-                    if(errorCount > 0){
-                        log.debug("参数校验出错信息：{}", result);
-                        return new CommonResult().validateFailed(result);
-                    }
+    public Object validAround(ProceedingJoinPoint point) throws Throwable{
+        //校验参数
+        Object[] args = point.getArgs();
+        for (Object obj : args) {
+            if(obj instanceof BindingResult){
+                BindingResult result = (BindingResult) obj;
+                //检验错误数
+                int errorCount = result.getErrorCount();
+                if(errorCount > 0){
+                    log.debug("参数校验出错信息：{}", result);
+                    return new CommonResult().validateFailed(result);
                 }
             }
-            //执行目标方法，就是反射的 method.invoke()
-            proceed = point.proceed(point.getArgs());
-        } catch (Throwable throwable) {
-            //出现异常，直接抛出去，给全局异常进行统一处理
-            throw new RuntimeException(throwable);
         }
-
-        return proceed;
+        //执行目标方法，就是反射的 method.invoke()
+        return point.proceed(point.getArgs());
     }
 
 }

@@ -34,14 +34,14 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
     RedisTemplate<Object, Object> redisTemplate;
 
     @Override
-    public List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(int i) {
+    public List<PmsProductCategoryWithChildrenItem> listCategoryWithChildren(int i) {
         Object cacheMenu = redisTemplate.opsForValue().get(SysCacheConstant.CATEGORY_MENU_CACHE_KEY);
         List<PmsProductCategoryWithChildrenItem> items = null;
         if(cacheMenu != null){
             items = (List<PmsProductCategoryWithChildrenItem>) cacheMenu;
         }
         else{
-            items = productCategoryMapper.listCatelogWithChilder(i);
+            items = productCategoryMapper.listCategoryWithChildren(i);
             //加入缓存
             redisTemplate.opsForValue().set(SysCacheConstant.CATEGORY_MENU_CACHE_KEY, items);
         }

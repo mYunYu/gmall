@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
 
-    List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(int i);
+    List<PmsProductCategoryWithChildrenItem> listCategoryWithChildren(int i);
 }

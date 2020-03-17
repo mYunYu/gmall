@@ -19,9 +19,9 @@
     </resultMap>
 
     <resultMap id="ExtendResultMap" type="com.jju.gmall.vo.product.PmsProductCategoryWithChildrenItem"
-        extends="BaseResultMap">
+                    extends="BaseResultMap">
             <collection property="children"
-                        select="listCatelogWithChilder" column="id"></collection>
+                        select="listCategoryWithChildren" column="id"></collection>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -29,8 +29,8 @@
         id, parent_id, name, level, product_count, product_unit, nav_status, show_status, sort, icon, keywords, description
     </sql>
 
-    <!--List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(int i);-->
-    <select id="listCatelogWithChilder" resultMap="ExtendResultMap">
+    <!--List<PmsProductCategoryWithChildrenItem> listCategoryWithChildren(int i);-->
+    <select id="listCategoryWithChildren" resultMap="ExtendResultMap">
       select * from pms_product_category where parent_id = #{i}
     </select>
 

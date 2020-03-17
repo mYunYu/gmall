@@ -16,5 +16,5 @@ import java.util.List;
  */
 public interface ProductCategoryService extends IService<ProductCategory> {
 
-    List<PmsProductCategoryWithChildrenItem> listCatelogWithChilder(int i);
+    List<PmsProductCategoryWithChildrenItem> listCategoryWithChildren(int i);
 }

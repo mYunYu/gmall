@@ -38,7 +38,7 @@ public class PmsProductController {
         log.debug("当前线程....{}-->{}",Thread.currentThread().getId(),Thread.currentThread().getName());
 
         // TODO: 2020-03-16
-//        productService.saveProduct(productParam);
+        productService.saveProduct(productParam);
         return new CommonResult().success(null);
     }
 
@@ -59,10 +59,7 @@ public class PmsProductController {
     @ApiOperation("查询商品")
     @GetMapping(value = "/list")
     public Object getList(PmsProductQueryParam productQueryParam) {
-        //TODO 查询商品
-
         PageInfoVo pageInfoVo =  productService.productPageInfo(productQueryParam);
-
         return new CommonResult().success(pageInfoVo);
     }
 
