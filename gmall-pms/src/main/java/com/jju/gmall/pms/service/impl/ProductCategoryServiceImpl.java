@@ -41,6 +41,7 @@ public class ProductCategoryServiceImpl extends ServiceImpl<ProductCategoryMappe
             items = (List<PmsProductCategoryWithChildrenItem>) cacheMenu;
         }
         else{
+            //可以通过锁机制，防止并发访问数据库
             items = productCategoryMapper.listCategoryWithChildren(i);
             //加入缓存
             redisTemplate.opsForValue().set(SysCacheConstant.CATEGORY_MENU_CACHE_KEY, items);
