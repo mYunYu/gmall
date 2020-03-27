@@ -14,7 +14,8 @@ public class HelloController {
     @GetMapping("/inc")
     public String incr(){
 //        redisIncrService.incr();
-        redisIncrService.incrDistribute();
+//        redisIncrService.incrDistribute();
+        redisIncrService.useRedissonForLock();
         return "ok";
     }
 
