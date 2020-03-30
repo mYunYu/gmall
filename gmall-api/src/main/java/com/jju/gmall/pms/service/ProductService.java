@@ -2,6 +2,7 @@ package com.jju.gmall.pms.service;
 
 import com.jju.gmall.pms.entity.Product;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.jju.gmall.to.es.EsProduct;
 import com.jju.gmall.vo.PageInfoVo;
 import com.jju.gmall.vo.product.PmsProductParam;
 import com.jju.gmall.vo.product.PmsProductQueryParam;
@@ -44,4 +45,8 @@ public interface ProductService extends IService<Product> {
      * @param publishStatus
      */
     void updatePublishStatus(List<Long> ids, Integer publishStatus);
+
+    EsProduct productAllInfo(Long id);
+
+    EsProduct productSkuInfo(Long id);
 }

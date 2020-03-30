@@ -17,10 +17,11 @@ import com.jju.gmall.vo.PageInfoVo;
 import com.jju.gmall.vo.product.PmsProductParam;
 import com.jju.gmall.vo.product.PmsProductQueryParam;
 import io.searchbox.client.JestClient;
-import io.searchbox.core.Delete;
-import io.searchbox.core.DocumentResult;
-import io.searchbox.core.Index;
+import io.searchbox.core.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.lucene.search.join.ScoreMode;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -315,6 +317,55 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
                 saveProductToEs(id);
             });
         }
+    }
+
+    @Override
+    public EsProduct productAllInfo(Long id) {
+        EsProduct esProduct = null;
+        //按照id查询商品
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.termQuery("id", id));
+
+        Search search = new Search.Builder(builder.toString())
+                .addIndex(EsConstant.PRODUCT_INDEX)
+                .addType(EsConstant.PRODUCT_INFO_ES_TYPE)
+                .build();
+
+        try {
+            SearchResult execute = jestClient.execute(search);
+            List<SearchResult.Hit<EsProduct, Void>> hits = execute.getHits(EsProduct.class);
+            esProduct = hits.get(0).source;
+        } catch (IOException e) {
+
+        }
+
+        return esProduct;
+    }
+
+    @Override
+    public EsProduct productSkuInfo(Long id) {
+        EsProduct esProduct = null;
+        //按照id查询商品
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.nestedQuery(
+                "skuProductInfos",
+                QueryBuilders.termQuery("skuProductInfos.id", id),
+                ScoreMode.None));
+
+        Search search = new Search.Builder(builder.toString())
+                .addIndex(EsConstant.PRODUCT_INDEX)
+                .addType(EsConstant.PRODUCT_INFO_ES_TYPE)
+                .build();
+
+        try {
+            SearchResult execute = jestClient.execute(search);
+            List<SearchResult.Hit<EsProduct, Void>> hits = execute.getHits(EsProduct.class);
+            esProduct = hits.get(0).source;
+        } catch (IOException e) {
+
+        }
+
+        return esProduct;
     }
 
     //删除es数据
